@@ -13,6 +13,8 @@ public class Investigator {
 	private int edu;
 	private int pow;
 	private int luck;
+	private int[] characteristics = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+	// Index is; Str, Con, Dex, Siz, App, Nte, Edu, Pow, Luck
 	private int hp;
 	private int sanity;
 	private int pIP;
@@ -25,75 +27,75 @@ public class Investigator {
 	
 	
 	public int getStr() {
-		return str;
+		return characteristics[0];
 	}
 
 	public void setStr(int str) {
-		this.str = str;
+		characteristics[0] = str;
 	}
 
 	public int getCon() {
-		return con;
+		return characteristics[1];
 	}
 
 	public void setCon(int con) {
-		this.con = con;
+		characteristics[1] = con;
 	}
 
 	public int getDex() {
-		return dex;
+		return characteristics[2];
 	}
 
 	public void setDex(int dex) {
-		this.dex = dex;
+		characteristics[2] = dex;
 	}
 
 	public int getSiz() {
-		return siz;
+		return characteristics[3];
 	}
 
 	public void setSiz(int siz) {
-		this.siz = siz;
+		characteristics[3] = siz;
 	}
 
 	public int getApp() {
-		return app;
+		return characteristics[4];
 	}
 
 	public void setApp(int app) {
-		this.app = app;
+		characteristics[4] = app;
 	}
 
 	public int getNte() {
-		return nte;
+		return characteristics[5];
 	}
 
 	public void setNte(int nte) {
-		this.nte = nte;
+		characteristics[5] = nte;
 	}
 
 	public int getEdu() {
-		return edu;
+		return characteristics[6];
 	}
 
 	public void setEdu(int edu) {
-		this.edu = edu;
+		characteristics[6] = edu;
 	}
 
 	public int getPow() {
-		return pow;
+		return characteristics[7];
 	}
 
 	public void setPow(int pow) {
-		this.pow = pow;
+		characteristics[7] = pow;
 	}
 
 	public int getLuck() {
-		return luck;
+		return characteristics[8];
 	}
 
 	public void setLuck(int luck) {
-		this.luck = luck;
+		characteristics[8] = luck;
 	}
 
 	public int getSanity() {
@@ -167,15 +169,12 @@ public class Investigator {
 	
 	public Investigator(String name) {
 		this.name = name;
-		this.str = generate3d6() * 5;
-		this.dex = generate3d6() * 5;
-		this.con = generate3d6() * 5;
-		this.app = generate3d6() * 5;
-		this.pow = generate3d6() * 5;
-		this.luck = generate3d6() * 5;
-		this.edu = generate2d6() * 5;
-		this.siz = generate2d6() * 5;
-		this.nte = generate2d6() * 5;
+		for(int i = 0; i<6; i++) {
+			characteristics[i] = generate3d6() * 5;
+		}
+		for(int i = 6; i < 9; i++) {
+			characteristics[i] = generate2d6() * 5;
+		}
 		this.hp = determineHP();
 		this.sanity = this.pow;
 		this.mp = determineMP();
@@ -185,7 +184,8 @@ public class Investigator {
 	}
 	
 	public int determineBuild() {
-		int build = this.str + this.siz;
+			// Build = Str plus Siz
+		int build = characteristics[0] + characteristics[3];
 		int buildValue = 0;
 		if(build <= 64) {
 			buildValue = -2;
@@ -202,44 +202,51 @@ public class Investigator {
 	}
 	
 	public int determineHP() {
-		return (this.con + this.siz) / 10;
+			// Con plus Siz divided by 10, rounding down
+		return (characteristics[1] + characteristics[3]) / 10;
 	}
 	
 	public int determineMOV() {
-		if(this.dex < this.siz && this.str < this.siz) {
+			// If Dex and Str are both lower than Siz
+		if(characteristics[2] < characteristics[3] && characteristics[0] < characteristics[3]) {
 			return 7;
-		} else if(this.dex > this.siz && this.str > this.siz) {
+			// If Dex and Str are both higher than Siz
+		} else if(characteristics[2] > characteristics[3] && characteristics[0] > characteristics[3]) {
 			return 9;
+			// Otherwise
 		} else {
 			return 8;
 		}
 	}
 	
 	public int determinePIP() {
-		return this.nte * 2;
+			// Nte times 2
+		return characteristics[5] * 2;
 	}
 	
 	public int determineMP() {
-		return this.pow / 5;
+			// Pow times 5
+		return characteristics[7] / 5;
 	}
 	
 	@Override
 	public String toString() {
 		String line1 = "Name: " + this.name;
-		String line2 = "\nStrength: " + this.str;
-		String line3 = "\nConstitution: " + this.con;
-		String line4 = "\nDexterity: " + this.dex;
-		String line5 = "\nSize: " + this.siz;
-		String line6 = "\nWillpower: " + this.pow;
-		String line7 = "\nIntelligence: " + this.nte;
-		String line8 = "\nEducation: " + this.edu;
-		String line9 = "\nLuck: " + this.luck;
-		String line10 = "\nHP: " + determineHP();
-		String line11 = "\nMP: " + this.mp;
-		String line12 = "\nBuild: " + determineBuild();
-		String line13 = "\nMOV: " + determineMOV();
-		String line14 = "\nPersonal Interest Points: " + this.pIP;
-		String line15 = "\nSanity: " + this.sanity;
-		return line1+line2+line3+line4+line5+line6+line7+line8+line9+line10+line11+line12+line13+line14+line15;
+		String line2 = "\nStrength: " + characteristics[0];
+		String line3 = "\nConstitution: " + characteristics[1];
+		String line4 = "\nDexterity: " + characteristics[2];
+		String line5 = "\nSize: " + characteristics[3];
+		String line6 = "\nAppearance" + characteristics[4];
+		String line7 = "\nWillpower: " + characteristics[7];
+		String line8 = "\nIntelligence: " + characteristics[5];
+		String line9 = "\nEducation: " + characteristics[6];
+		String line10 = "\nLuck: " + characteristics[8];
+		String line11 = "\nHP: " + determineHP();
+		String line12 = "\nMP: " + this.mp;
+		String line13 = "\nBuild: " + determineBuild();
+		String line14 = "\nMOV: " + determineMOV();
+		String line15 = "\nPersonal Interest Points: " + this.pIP;
+		String line16 = "\nSanity: " + this.sanity;
+		return line1+line2+line3+line4+line5+line6+line7+line8+line9+line10+line11+line12+line13+line14+line15+line16;
 	}
 }
