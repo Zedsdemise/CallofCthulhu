@@ -4,15 +4,6 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Investigator {
-	private int str;
-	private int con;
-	private int dex;
-	private int siz;
-	private int app;
-	private int nte;
-	private int edu;
-	private int pow;
-	private int luck;
 	private int[] characteristics = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 	// Index is; Str, Con, Dex, Siz, App, Nte, Edu, Pow, Luck
 	private int hp;
@@ -176,7 +167,7 @@ public class Investigator {
 			characteristics[i] = generate2d6() * 5;
 		}
 		this.hp = determineHP();
-		this.sanity = this.pow;
+		this.sanity = characteristics[7];
 		this.mp = determineMP();
 		this.pIP = determinePIP();
 		this.mov = determineMOV();
