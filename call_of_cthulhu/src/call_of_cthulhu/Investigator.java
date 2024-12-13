@@ -13,11 +13,145 @@ public class Investigator {
 	private int edu;
 	private int pow;
 	private int luck;
+	private int hp;
 	private int sanity;
+	private int pIP;
+	private int mp;
+	private int build;
+	private int mov;
 	private String name;
 	Random rand = new Random();
 	Scanner scnr = new Scanner(System.in);
 	
+	
+	public int getStr() {
+		return str;
+	}
+
+	public void setStr(int str) {
+		this.str = str;
+	}
+
+	public int getCon() {
+		return con;
+	}
+
+	public void setCon(int con) {
+		this.con = con;
+	}
+
+	public int getDex() {
+		return dex;
+	}
+
+	public void setDex(int dex) {
+		this.dex = dex;
+	}
+
+	public int getSiz() {
+		return siz;
+	}
+
+	public void setSiz(int siz) {
+		this.siz = siz;
+	}
+
+	public int getApp() {
+		return app;
+	}
+
+	public void setApp(int app) {
+		this.app = app;
+	}
+
+	public int getNte() {
+		return nte;
+	}
+
+	public void setNte(int nte) {
+		this.nte = nte;
+	}
+
+	public int getEdu() {
+		return edu;
+	}
+
+	public void setEdu(int edu) {
+		this.edu = edu;
+	}
+
+	public int getPow() {
+		return pow;
+	}
+
+	public void setPow(int pow) {
+		this.pow = pow;
+	}
+
+	public int getLuck() {
+		return luck;
+	}
+
+	public void setLuck(int luck) {
+		this.luck = luck;
+	}
+
+	public int getSanity() {
+		return sanity;
+	}
+
+	public void setSanity(int sanity) {
+		this.sanity = sanity;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public int getPIP() {
+		return pIP;
+	}
+
+	public void setpIP(int pIP) {
+		this.pIP = pIP;
+	}
+	
+	public int getMP() {
+		return mp;
+	}
+
+	public void setMP(int mP) {
+		this.mp = mP;
+	}
+	
+	public int getHP() {
+		return this.hp;
+	}
+	
+	public void setHP(int hp) {
+		this.hp = hp;
+	}
+
+	public int getBuild() {
+		return build;
+	}
+
+	public void setBuild(int build) {
+		this.build = build;
+	}
+
+	public int getMov() {
+		return mov;
+	}
+
+	public void setMov(int mov) {
+		this.mov = mov;
+	}
+
 	public int generate2d6() {
 		int rand_1 = rand.nextInt(6) + 1;
 		int rand_2 = rand.nextInt(6) + 1;
@@ -42,7 +176,12 @@ public class Investigator {
 		this.edu = generate2d6() * 5;
 		this.siz = generate2d6() * 5;
 		this.nte = generate2d6() * 5;
+		this.hp = determineHP();
 		this.sanity = this.pow;
+		this.mp = determineMP();
+		this.pIP = determinePIP();
+		this.mov = determineMOV();
+		this.hp = determineHP();
 	}
 	
 	public int determineBuild() {
@@ -96,10 +235,10 @@ public class Investigator {
 		String line8 = "\nEducation: " + this.edu;
 		String line9 = "\nLuck: " + this.luck;
 		String line10 = "\nHP: " + determineHP();
-		String line11 = "\nMP: " + determineMP();
+		String line11 = "\nMP: " + this.mp;
 		String line12 = "\nBuild: " + determineBuild();
 		String line13 = "\nMOV: " + determineMOV();
-		String line14 = "\nPersonal Interest Points: " + determinePIP();
+		String line14 = "\nPersonal Interest Points: " + this.pIP;
 		String line15 = "\nSanity: " + this.sanity;
 		return line1+line2+line3+line4+line5+line6+line7+line8+line9+line10+line11+line12+line13+line14+line15;
 	}
