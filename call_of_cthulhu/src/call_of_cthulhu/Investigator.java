@@ -227,7 +227,7 @@ public class Investigator {
 		String line3 = "\nConstitution: " + characteristics[1];
 		String line4 = "\nDexterity: " + characteristics[2];
 		String line5 = "\nSize: " + characteristics[3];
-		String line6 = "\nAppearance" + characteristics[4];
+		String line6 = "\nAppearance: " + characteristics[4];
 		String line7 = "\nWillpower: " + characteristics[7];
 		String line8 = "\nIntelligence: " + characteristics[5];
 		String line9 = "\nEducation: " + characteristics[6];
